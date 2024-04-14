@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+/**
+ * Member class is responsible for handling all member related operations.
+ */
 public class Member {
 
     private static int currentMemberID;
@@ -550,7 +553,7 @@ public class Member {
                 System.out.println("Class ID: " + classID);
                 System.out.println("Class Name: " + name);
                 System.out.println("Class Day: " + dayOfWeek);
-                Schedule.displayTimeslot(timeslotID);
+                Global.displayTimeslot(timeslotID);
 
                 System.out.println();
             }
@@ -560,6 +563,7 @@ public class Member {
     }
 
     public static void joinClass() {
+        displayClasses();
         System.out.println("Enter the class ID: ");
         int classID = UI.getUserInputInt();
         try {

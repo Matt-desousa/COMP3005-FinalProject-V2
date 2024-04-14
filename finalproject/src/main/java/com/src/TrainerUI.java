@@ -1,5 +1,8 @@
 package com.src;
 
+/**
+ * TrainerUI class contains methods that display the Trainer user interface.
+ */
 public class TrainerUI {
 
     public static int login() {

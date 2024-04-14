@@ -1,5 +1,9 @@
 package com.src;
 
+/**
+ * AdminUI class contains methods that display the user interface for the admin
+ * user.
+ */
 public class AdminUI {
 
     public static int login() {

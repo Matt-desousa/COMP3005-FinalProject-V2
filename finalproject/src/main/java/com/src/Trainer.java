@@ -3,6 +3,9 @@ package com.src;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+/**
+ * Trainer class is responsible for handling all trainer related operations.
+ */
 public class Trainer {
 
     private static int currentTrainerID;
@@ -59,7 +62,7 @@ public class Trainer {
                 System.out.println("Class Name: " + name);
                 System.out.println("Class Type: " + type);
                 System.out.println("Class Day: " + dayOfWeek);
-                Schedule.displayTimeslot(timeslotID);
+                Global.displayTimeslot(timeslotID);
 
                 System.out.println();
             }
@@ -117,7 +120,7 @@ public class Trainer {
                     day = resultSet.getString("dayOfWeek");
                     System.out.println("Day: " + day);
                 }
-                Schedule.displayTimeslot(resultSet.getInt("timeslotID"));
+                Global.displayTimeslot(resultSet.getInt("timeslotID"));
             }
         } catch (Exception e) {
             e.printStackTrace();

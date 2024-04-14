@@ -17,7 +17,7 @@ public class Main {
 
             if (connection != null) { // If the connection is successful
                 System.out.println("Connected to PostgreSQL successfully!\n\n");
-                Launch.launch();
+                Launch.launch(); // Launch the application
 
             } else {
                 System.out.println("Failed to establish connection.");

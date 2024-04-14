@@ -1,5 +1,9 @@
 package com.src;
 
+/**
+ * MemberUI class contains methods that display the user interface for the
+ * Member class.
+ */
 public class MemberUI {
     public static int login() {
         System.out.print(

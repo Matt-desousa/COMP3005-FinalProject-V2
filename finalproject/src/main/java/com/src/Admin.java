@@ -4,6 +4,9 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+/**
+ * Admin class that contains all the functions that an admin can perform
+ */
 public class Admin {
 
     public static int currentAdminID;
@@ -163,7 +166,7 @@ public class Admin {
 
                 System.out.println("Class Name: " + className);
                 System.out.println("Day: " + dayOfWeek);
-                Schedule.displayTimeslot(timeslotID);
+                Global.displayTimeslot(timeslotID);
                 System.out.println("---");
 
                 System.out.println();
@@ -171,6 +174,37 @@ public class Admin {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static boolean checkRoomAvailability(int classID, int roomID) {
+        try {
+            Statement classInformation = Main.connection.createStatement(); // Create a statement
+            ResultSet classResultSet = classInformation
+                    .executeQuery("SELECT * FROM Classes WHERE classID = " + classID);
+            classResultSet.next();
+            int timeslotID = classResultSet.getInt("timeslotID");
+            String dayOfWeek = classResultSet.getString("dayOfWeek");
+
+            Statement statement = Main.connection.createStatement(); // Create a statement
+            ResultSet resultSet = statement
+                    .executeQuery("SELECT * FROM Classes c JOIN Bookings b ON c.classID = b.classID");
+
+            while (resultSet.next()) {
+                if (resultSet.getInt("classID") == classID) { // If the class already has a room booked
+                    System.out.println("This class already has a room booked.");
+                    return false;
+                }
+                if (resultSet.getInt("roomID") == roomID && resultSet.getString("dayOfWeek").equals(dayOfWeek)
+                        && resultSet.getInt("timeslotID") == timeslotID) { // If the room is booked for that time
+                    System.out.println("This room is already booked for that time and day.");
+                    return false;
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
     public static void addBooking() {
@@ -181,7 +215,7 @@ public class Admin {
         System.out.println("Enter the room ID: ");
         int roomID = UI.getUserInputInt(); // Get the room ID
 
-        if (!Schedule.checkRoomAvailability(classID, roomID)) {
+        if (!checkRoomAvailability(classID, roomID)) {
             return;
         }
 
@@ -223,6 +257,30 @@ public class Admin {
                     "INSERT INTO Teaching (trainerID, classID) VALUES (" + trainerID + ", " + classID + ")");
 
             System.out.println("Trainer assigned successfully!");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void displayClasses() {
+        try {
+            Statement statement = Main.connection.createStatement(); // Create a statement
+            ResultSet resultSet = statement.executeQuery(
+                    "SELECT * FROM Classes WHERE classID)"); // Execute the query
+
+            while (resultSet.next()) {
+                int classID = resultSet.getInt("classID");
+                String name = resultSet.getString("name");
+                String dayOfWeek = resultSet.getString("dayOfWeek");
+                int timeslotID = resultSet.getInt("timeslotID");
+
+                System.out.println("Class ID: " + classID);
+                System.out.println("Class Name: " + name);
+                System.out.println("Class Day: " + dayOfWeek);
+                Global.displayTimeslot(timeslotID);
+
+                System.out.println();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

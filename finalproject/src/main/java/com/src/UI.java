@@ -2,6 +2,9 @@ package com.src;
 
 import java.util.Scanner;
 
+/**
+ * UI class contains methods that are used for user input.
+ */
 public class UI {
     public static int getUserInputInt() {
         Scanner scanner = new Scanner(System.in);
