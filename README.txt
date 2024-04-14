@@ -14,3 +14,5 @@ It allows admins to manage classes, bookings, equipment, and payment and billing
 5. Run the Main.java file and have fun!
 
 # Link to Youtube Video: https://youtu.be/LqXcF3iHh0Q
+
+# Github repository link: https://github.com/Matt-desousa/COMP3005-FinalProject-V2
